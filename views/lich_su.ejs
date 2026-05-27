@@ -9,61 +9,158 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
     <style>
-        /* FONT CHỮ CHUẨN APPLE & MÀU NỀN */
+        /* Reset & premium fonts */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #e5e5ea; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c1c1c4; }
+
         body {
-            background-color: #f5f5f7; 
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #faf9f5; 
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             -webkit-font-smoothing: antialiased;
             color: #1d1d1f;
             overflow-x: hidden;
         }
         
-        .text-orange { color: #f26522 !important; }
-        .bg-orange { background-color: #f26522 !important; color: white; }
-        .btn-orange { background-color: #f26522; color: white; border: none; font-weight: 600; padding: 10px 20px; border-radius: 12px; transition: 0.3s; }
-        .btn-orange:hover { background-color: #d9531e; color: white; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(242, 101, 34, 0.3); }
+        .text-orange { color: #8c7b45 !important; }
+        .bg-orange { background-color: #F3E6B3 !important; color: #1d1d1f; }
+        
+        .btn-orange { 
+            background: linear-gradient(135deg, #F3E6B3 0%, #e2d39d 100%); 
+            color: #3d3516; 
+            border: none; 
+            font-weight: 600; 
+            padding: 10px 20px; 
+            border-radius: 12px; 
+            transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
+            box-shadow: 0 4px 12px rgba(243, 230, 179, 0.3);
+        }
+        .btn-orange:hover { 
+            background: linear-gradient(135deg, #e2d39d 0%, #d1c18c 100%); 
+            color: #241f0b; 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 15px rgba(243, 230, 179, 0.5); 
+        }
 
         .wrapper { display: flex; width: 100%; align-items: stretch; }
         
-        /* Sidebar (Phong cách thẻ nổi) */
+        /* Premium Sidebar */
         #sidebar {
             min-width: 260px;
             max-width: 260px;
             background: #ffffff;
             min-height: 100vh;
-            border-right: 1px solid rgba(0,0,0,0.05);
+            border-right: 1px solid rgba(0,0,0,0.04);
             display: flex;
             flex-direction: column;
             position: fixed;
-            box-shadow: 2px 0 20px rgba(0,0,0,0.02);
+            box-shadow: 4px 0 24px rgba(140, 123, 69, 0.02);
             z-index: 10;
         }
         .sidebar-header { padding: 30px 24px; }
         
-        .nav-link { color: #515154; padding: 12px 20px; font-weight: 500; border-radius: 12px; margin: 4px 16px; transition: all 0.2s; font-size: 0.95rem;}
+        .nav-link { 
+            color: #515154; 
+            padding: 12px 20px; 
+            font-weight: 500; 
+            border-radius: 12px; 
+            margin: 4px 16px; 
+            transition: all 0.25s ease; 
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
         .nav-link i { margin-right: 12px; font-size: 1.2rem; vertical-align: text-bottom;}
-        .nav-link:hover { background: #fff3ed; color: #f26522; }
-        .nav-link.active { background: #f26522; color: #ffffff; box-shadow: 0 4px 10px rgba(242, 101, 34, 0.25); }
+        .nav-link:hover { background: rgba(243, 230, 179, 0.12); color: #8c7b45; }
+        .nav-link.active { 
+            background: linear-gradient(135deg, #F3E6B3 0%, #e2d39d 100%); 
+            color: #3d3516; 
+            box-shadow: 0 4px 10px rgba(243, 230, 179, 0.3); 
+            font-weight: 600;
+        }
 
-        .sidebar-footer { margin-top: auto; padding: 24px; border-top: 1px solid rgba(0,0,0,0.05); }
+        .sidebar-heading {
+            font-size: 0.7rem;
+            letter-spacing: 0.8px;
+            font-weight: 700;
+            color: #9e9e9f;
+            padding-left: 24px;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        .sidebar-footer { margin-top: auto; padding: 24px; border-top: 1px solid rgba(0,0,0,0.04); }
         
         #content { width: calc(100% - 260px); margin-left: 260px; padding: 40px 50px; }
         
-        /* Card chứa bảng (Apple Glassmorphism) */
+        /* Card Container */
         .content-card {
             background: #ffffff;
-            border-radius: 20px;
-            border: 1px solid rgba(0,0,0,0.04);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+            border-radius: 24px;
+            border: 1px solid rgba(140, 123, 69, 0.04);
+            box-shadow: 0 10px 30px rgba(140, 123, 69, 0.02);
             overflow: hidden;
         }
 
-        /* Tùy chỉnh bảng table cho sang */
-        .table-custom { --bs-table-bg: transparent; margin-bottom: 0; }
-        .table-custom thead th { border-bottom: 1px solid rgba(0,0,0,0.05); color: #86868b; font-size: 0.8rem; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; padding: 15px 20px;}
-        .table-custom tbody td { border-bottom: 1px solid rgba(0,0,0,0.03); padding: 20px; vertical-align: middle;}
-        .table-custom tbody tr:hover { background-color: #fafafc; }
+        /* Tables */
+        .table-custom { margin-bottom: 0; }
+        .table-custom thead th { 
+            border-bottom: 1px solid rgba(0,0,0,0.04); 
+            color: #86868b; 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            font-weight: 600; 
+            letter-spacing: 0.8px; 
+            padding: 18px 24px;
+        }
+        .table-custom tbody td { 
+            border-bottom: 1px solid rgba(0,0,0,0.02); 
+            padding: 20px 24px; 
+            vertical-align: middle;
+        }
+        .table-custom tbody tr:hover { background-color: rgba(243, 230, 179, 0.02); }
         .table-custom tbody tr:last-child td { border-bottom: none; }
+        
+        /* Badges */
+        .badge-soft {
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .badge-soft-success {
+            background-color: #f2fcf5;
+            color: #1e7b3c;
+            border: 1px solid rgba(52, 199, 89, 0.15);
+        }
+        
+        .badge-soft-danger {
+            background-color: #fff5f5;
+            color: #d32f2f;
+            border: 1px solid rgba(244, 67, 54, 0.15);
+        }
+        
+        .badge-soft-secondary {
+            background-color: #f4f5f7;
+            color: #6c757d;
+            border: 1px solid rgba(108, 117, 125, 0.15);
+        }
+        
+        .badge-soft-warning {
+            background-color: #fff8eb;
+            color: #b25e00;
+            border: 1px solid rgba(255, 149, 0, 0.15);
+        }
+
+        @media (max-width: 992px) {
+            #sidebar { transform: translateX(-100%); position: fixed; }
+            #content { width: 100%; margin-left: 0; padding: 30px 20px; }
+        }
     </style>
 </head>
 <body>
@@ -73,7 +170,7 @@
         <nav id="sidebar">
             <div class="sidebar-header d-flex align-items-center mb-2">
                 <div class="bg-orange rounded-3 p-2 me-3 d-flex align-items-center justify-content-center shadow-sm" style="width: 40px; height: 40px;">
-                    <i class="bi bi-buildings text-white fs-5"></i>
+                    <i class="bi bi-buildings text-dark fs-5"></i>
                 </div>
                 <div>
                     <h5 class="mb-0 fw-bold text-dark" style="letter-spacing: -0.5px;">Present</h5>
@@ -110,25 +207,15 @@
                 <% } %>
             </ul>
 
-                <!-- Phân quyền Quản trị -->
-                <% if (user.ma_chuc_vu === 1 || user.ma_chuc_vu === 2) { %>
-                    <h6 class="sidebar-heading px-4 mt-4 mb-2 text-muted small fw-bold" style="font-size: 0.7rem; letter-spacing: 0.5px;">QUẢN TRỊ VIÊN</h6>
-                    <li class="nav-item">
-                        <a href="/duyet-don" class="nav-link"><i class="bi bi-check2-square"></i> Duyệt đơn</a>
-                    </li>
-                      <li class="nav-item"><a href="/quan-ly-nhan-su" class="nav-link "><i class="bi bi-people-fill"></i> Hồ sơ Nhân sự</a></li>
-                <% } %>
-            </ul>
-
             <div class="sidebar-footer">
                 <div class="d-flex align-items-center mb-4 px-2">
-                    <img src="https://ui-avatars.com/api/?name=<%= user.ho_ten %>&background=f26522&color=fff&rounded=true" alt="Avatar" width="40" height="40" class="me-3 shadow-sm">
+                    <img src="https://ui-avatars.com/api/?name=<%= user.ho_ten %>&background=F3E6B3&color=1d1d1f&rounded=true" alt="Avatar" width="40" height="40" class="me-3 shadow-sm rounded-circle">
                     <div style="overflow: hidden;">
                         <h6 class="mb-0 fw-bold text-truncate" style="font-size: 0.9rem;"><%= user.ho_ten %></h6>
                         <small class="text-muted text-truncate d-block" style="font-size: 0.8rem;"><%= user.email %></small>
                     </div>
                 </div>
-                <a href="/dang-xuat" class="btn btn-light w-100 fw-semibold" style="color: #ff3b30; border-radius: 12px; background: #fff5f5;"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a>
+                <a href="/dang-xuat" class="btn btn-light w-100 fw-semibold" style="color: #ff3b30; border-radius: 12px; background: #fff5f5; border: none; padding: 10px;"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a>
             </div>
         </nav>
 
@@ -136,7 +223,7 @@
         <div id="content">
             <div class="d-flex justify-content-between align-items-center mb-5">
                 <div>
-                    <h2 class="fw-bold mb-1" style="letter-spacing: -1px;">Lịch sử nghỉ phép</h2>
+                    <h2 class="fw-bold mb-1" style="letter-spacing: -0.8px;">Lịch sử nghỉ phép</h2>
                     <p class="text-muted mb-0" style="font-size: 0.95rem;">Theo dõi tiến độ xét duyệt và lưu trữ các lá đơn của bạn</p>
                 </div>
                 <div>
@@ -146,9 +233,9 @@
 
             <div class="content-card">
                 <% if (danhSach.length === 0) { %>
-                    <!-- Trạng thái trống (Empty State) cực kỳ tinh tế -->
+                    <!-- Empty State -->
                     <div class="text-center py-5">
-                        <div class="d-inline-flex justify-content-center align-items-center bg-light rounded-circle mb-4 mt-3" style="width: 100px; height: 100px;">
+                        <div class="d-inline-flex justify-content-center align-items-center bg-light rounded-circle mb-4 mt-3 shadow-sm" style="width: 100px; height: 100px; background-color: #faf9f5 !important; border: 1px solid rgba(243, 230, 179, 0.3);">
                             <i class="bi bi-folder2-open fs-1" style="color: #c1c1c4;"></i>
                         </div>
                         <h5 class="fw-bold" style="color: #1d1d1f;">Bạn chưa có đơn xin nghỉ nào</h5>
@@ -170,47 +257,53 @@
                             <tbody>
                                 <% danhSach.forEach(function(don) { %>
                                     <tr>
+                                        <!-- Loại nghỉ & Ngày nộp -->
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <div class="bg-light rounded-circle d-flex justify-content-center align-items-center me-3 text-orange" style="width:40px; height:40px;">
-                                                    <i class="bi bi-journal-text fs-5"></i>
+                                                <div class="bg-light rounded-circle d-flex justify-content-center align-items-center me-3 text-orange" style="width:40px; height:40px; background-color: rgba(243, 230, 179, 0.15) !important;">
+                                                    <i class="bi bi-journal-text fs-5" style="color: #8c7b45;"></i>
                                                 </div>
                                                 <div>
-                                                    <div class="fw-bold" style="color: #1d1d1f; font-size: 0.95rem;"><%= don.loai_nghi %></div>
+                                                    <div class="fw-bold text-dark" style="font-size: 0.95rem;"><%= don.loai_nghi %></div>
                                                     <small class="text-muted">Nộp ngày: <%= new Date(don.ngay_tao).toLocaleDateString('vi-VN') %></small>
                                                 </div>
                                             </div>
                                         </td>
+                                        
+                                        <!-- Thời gian -->
                                         <td>
-                                            <div class="fw-semibold" style="color: #1d1d1f; font-size: 0.9rem;">Từ: <%= new Date(don.ngay_bat_dau).toLocaleDateString('vi-VN') %></div>
-                                            <div class="fw-semibold text-muted" style="font-size: 0.9rem;">Đến: <%= new Date(don.ngay_ket_thuc).toLocaleDateString('vi-VN') %></div>
+                                            <div class="fw-semibold text-dark" style="font-size: 0.9rem;"><i class="bi bi-calendar-event me-1 text-muted"></i>Từ: <%= new Date(don.ngay_bat_dau).toLocaleDateString('vi-VN') %></div>
+                                            <div class="fw-semibold text-secondary" style="font-size: 0.85rem;"><i class="bi bi-calendar-x me-1 text-muted"></i>Đến: <%= new Date(don.ngay_ket_thuc).toLocaleDateString('vi-VN') %></div>
                                         </td>
+                                        
+                                        <!-- Lý do -->
                                         <td>
                                             <div class="text-secondary" style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.9rem;" title="<%= don.ly_do %>">
                                                 <%= don.ly_do %>
                                             </div>
                                         </td>
+                                        
+                                        <!-- Bàn giao -->
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <div class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center me-2 shadow-sm" style="width:24px; height:24px; font-size:10px;">
+                                                <div class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center me-2 shadow-sm" style="width:24px; height:24px; font-size:10px; background: linear-gradient(135deg, #F3E6B3 0%, #e2d39d 100%) !important; color: #3d3516 !important;">
                                                     <i class="bi bi-person"></i>
                                                 </div>
                                                 <span class="fw-semibold text-secondary" style="font-size: 0.9rem;"><%= don.nguoi_ban_giao %></span>
                                             </div>
                                         </td>
+                                        
+                                        <!-- Trạng thái -->
                                         <td class="text-end">
-                                            <!-- Đổi màu huy hiệu tùy theo trạng thái -->
                                             <% if (don.trang_thai === 'Đã duyệt') { %>
-                                                <span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill fw-bold border border-success border-opacity-25"><i class="bi bi-check-circle-fill me-1"></i>Đã duyệt</span>
+                                                <span class="badge-soft badge-soft-success"><i class="bi bi-check-circle-fill me-1"></i>Đã duyệt</span>
                                             <% } else if (don.trang_thai === 'Từ chối') { %>
-                                                <span class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill fw-bold border border-danger border-opacity-25"><i class="bi bi-x-circle-fill me-1"></i>Từ chối</span>
+                                                <span class="badge-soft badge-soft-danger"><i class="bi bi-x-circle-fill me-1"></i>Từ chối</span>
                                             <% } else if (don.trang_thai === 'Đã hủy') { %>
-                                                <!-- Trạng thái mới: Đã hủy -->
-                                                <span class="badge bg-secondary bg-opacity-10 text-secondary px-3 py-2 rounded-pill fw-bold border border-secondary border-opacity-25"><i class="bi bi-slash-circle-fill me-1"></i>Đã rút đơn</span>
+                                                <span class="badge-soft badge-soft-secondary"><i class="bi bi-slash-circle-fill me-1"></i>Đã rút đơn</span>
                                             <% } else { %>
-                                                <!-- Đang chờ duyệt: Hiện huy hiệu KÈM THEO nút Hủy -->
                                                 <div class="d-flex justify-content-end align-items-center gap-2">
-                                                    <span class="badge bg-warning bg-opacity-10 text-warning px-3 py-2 rounded-pill fw-bold border border-warning border-opacity-25" style="color: #d97706 !important;"><i class="bi bi-hourglass-split me-1"></i>Chờ duyệt</span>
+                                                    <span class="badge-soft badge-soft-warning"><i class="bi bi-hourglass-split me-1"></i>Chờ duyệt</span>
                                                     
                                                     <form action="/huy-don" method="POST" style="margin: 0;" onsubmit="return confirm('Bạn có chắc chắn muốn rút lá đơn này lại không?');">
                                                         <input type="hidden" name="ma_don" value="<%= don.ma_don %>">

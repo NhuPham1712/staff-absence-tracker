@@ -5,66 +5,199 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập - Công ty Present</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
-        /* Tùy chỉnh tông màu cam */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: linear-gradient(135deg, #fff8f0 0%, #ffe5d0 100%);
+            background-color: #f7f6f2;
             height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .text-orange { color: #f26522 !important; }
-        .btn-orange {
-            background-color: #f26522;
-            border-color: #f26522;
-            color: #fff;
-            transition: all 0.3s ease;
+
+        /* Animated Blobs */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 1;
+            opacity: 0.55;
+            animation: float 20s infinite alternate ease-in-out;
         }
-        .btn-orange:hover {
-            background-color: #d9531e;
-            border-color: #d9531e;
-            color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(242, 101, 34, 0.3);
+
+        .blob-1 {
+            width: 450px;
+            height: 450px;
+            background: #F3E6B3;
+            top: -10%;
+            left: -10%;
+            animation-duration: 25s;
         }
+
+        .blob-2 {
+            width: 400px;
+            height: 400px;
+            background: #e6dfc3;
+            bottom: -5%;
+            right: -5%;
+            animation-duration: 20s;
+        }
+
+        .blob-3 {
+            width: 300px;
+            height: 300px;
+            background: #fff4d1;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-duration: 18s;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(40px, -50px) scale(1.15) rotate(180deg); }
+            100% { transform: translate(-20px, 30px) scale(0.9) rotate(360deg); }
+        }
+
+        .login-container {
+            z-index: 10;
+            width: 100%;
+            max-width: 430px;
+            padding: 20px;
+        }
+
         .card-custom {
-            border-radius: 20px;
-            border: none;
-            box-shadow: 0 15px 35px rgba(242, 101, 34, 0.1);
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 50px rgba(140, 123, 69, 0.08);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .form-control:focus {
-            border-color: #f26522;
-            box-shadow: 0 0 0 0.25rem rgba(242, 101, 34, 0.25);
+
+        .card-custom:hover {
+            transform: translateY(-5px);
+        }
+
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #a38d4c 0%, #705f2b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 850;
+            letter-spacing: -1px;
+        }
+
+        .form-label-custom {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #7c7c80;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-control-custom {
+            border-radius: 14px;
+            padding: 14px 18px;
+            border: 1px solid rgba(0, 0, 0, 0.07);
+            background-color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            color: #1d1d1f;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .form-control-custom:focus {
+            border-color: #d9cc9c;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(243, 230, 179, 0.4);
+            outline: none;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, #F3E6B3 0%, #e2d39d 100%);
+            border: none;
+            color: #3d3516;
+            font-weight: 700;
+            padding: 14px;
+            border-radius: 14px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 15px rgba(243, 230, 179, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #e2d39d 0%, #d1c18c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(243, 230, 179, 0.5);
+            color: #241f0b;
+        }
+
+        .btn-gold:active {
+            transform: translateY(0);
+        }
+
+        .brand-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #F3E6B3 0%, #d1c18c 100%);
+            color: #3d3516;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(243, 230, 179, 0.3);
         }
     </style>
 </head>
-<body class="d-flex align-items-center">
+<body>
 
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-5 col-lg-4">
-                <div class="card card-custom">
-                    <div class="card-body p-5">
-                        <div class="text-center mb-4">
-                            <!-- Logo chữ -->
-                            <h2 class="fw-bolder text-orange mb-1">PRESENT</h2>
-                            <p class="text-muted small">Hệ thống Quản lý Nhân sự</p>
-                        </div>
-                        
-                        <!-- Form Đăng nhập -->
-                        <form action="/xu-ly-dang-nhap" method="POST">
-                            <div class="mb-3">
-                                <label class="form-label fw-semibold text-secondary small">Email công việc</label>
-                                <input type="email" class="form-control form-control-lg bg-light" name="email" placeholder="Nhập email..." required>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label fw-semibold text-secondary small">Mật khẩu</label>
-                                <input type="password" class="form-control form-control-lg bg-light" name="mat_khau" placeholder="Nhập mật khẩu..." required>
-                            </div>
-                            <button type="submit" class="btn btn-orange btn-lg w-100 fw-bold">ĐĂNG NHẬP</button>
-                        </form>
-                        
+    <!-- Background Blobs -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <div class="login-container">
+        <div class="card card-custom">
+            <div class="card-body p-4 p-md-5">
+                <div class="text-center mb-5">
+                    <div class="brand-icon">
+                        <i class="bi bi-buildings-fill"></i>
                     </div>
+                    <h2 class="text-gold-gradient mb-1">PRESENT</h2>
+                    <p class="text-muted small fw-medium">Hệ thống Quản lý Nhân sự & Phép</p>
                 </div>
+                
+                <!-- Form Đăng nhập -->
+                <form action="/xu-ly-dang-nhap" method="POST">
+                    <div class="mb-4">
+                        <label class="form-label-custom">Email công việc</label>
+                        <div class="input-group">
+                            <input type="email" class="form-control form-control-custom" name="email" placeholder="name@present.vn" required>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <label class="form-label-custom">Mật khẩu</label>
+                        </div>
+                        <input type="password" class="form-control form-control-custom" name="mat_khau" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-gold w-100 text-uppercase">Đăng nhập</button>
+                </form>
+                
             </div>
         </div>
     </div>

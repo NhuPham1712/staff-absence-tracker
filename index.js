@@ -44,7 +44,10 @@ app.post('/xu-ly-dang-nhap', blockSpamDangNhap, async (req, res) => {
     const cauLenhSQL = "SELECT * FROM nhan_vien WHERE email = ?";
     
     db.query(cauLenhSQL, [emailNhap], async (loi, ketQua) => {
-        if (loi) return res.send("Lỗi máy chủ!");
+        if (loi) {
+            console.error("Lỗi truy vấn đăng nhập:", loi);
+            return res.send("Lỗi máy chủ! Chi tiết: " + loi.message);
+        }
 
         if (ketQua.length > 0) {
             const user = ketQua[0];
@@ -60,7 +63,14 @@ app.post('/xu-ly-dang-nhap', blockSpamDangNhap, async (req, res) => {
             }
 
             // Nếu pass trong CSDL ĐÃ ĐƯỢC MÃ HÓA (Chuỗi dài loằng ngoằng) -> Dùng Bcrypt để đối chiếu
-            const dungMatKhau = await bcrypt.compare(matKhauNhap, user.mat_khau);
+            let dungMatKhau = false;
+            try {
+                if (user.mat_khau.startsWith('$2a$') || user.mat_khau.startsWith('$2b$') || user.mat_khau.startsWith('$2y$')) {
+                    dungMatKhau = await bcrypt.compare(matKhauNhap, user.mat_khau);
+                }
+            } catch (error) {
+                console.error("Lỗi khi so khớp mật khẩu bằng bcrypt:", error);
+            }
             
             if (dungMatKhau) {
                 req.session.user = user;
@@ -74,64 +84,6 @@ app.post('/xu-ly-dang-nhap', blockSpamDangNhap, async (req, res) => {
     });
 });
 
-// 3. Route hiển thị Dashboard (Nâng cấp: Bổ sung Hộp thông báo nhận bàn giao cá nhân)
-app.get('/dashboard', (req, res) => {
-    if (!req.session.user) {
-        return res.redirect('/');
-    }
-
-    const userHoTen = req.session.user.ho_ten;
-
-    // Lệnh 1: Tìm những người đang nghỉ HÔM NAY (Bảng tổng quan công ty)
-    const sqlVangMat = `
-        SELECT n.ho_ten, d.loai_nghi, d.nguoi_ban_giao 
-        FROM don_nghi_phep d
-        JOIN nhan_vien n ON d.ma_nhan_vien = n.ma_nhan_vien
-        WHERE d.trang_thai = 'Đã duyệt' 
-        AND CURDATE() BETWEEN d.ngay_bat_dau AND d.ngay_ket_thuc
-    `;
-
-    db.query(sqlVangMat, (loi1, danhSachVangMat) => {
-        if (loi1) {
-            console.error(loi1);
-            danhSachVangMat = []; 
-        }
-
-        // Lệnh 2: Lấy tất cả đơn ĐÃ DUYỆT mà người nhận bàn giao chính là NGƯỜI ĐANG ĐĂNG NHẬP
-        const sqlNhanBanGiao = `
-            SELECT d.*, n.ho_ten AS nguoi_nghi, n.email AS email_nguoi_nghi
-            FROM don_nghi_phep d
-            JOIN nhan_vien n ON d.ma_nhan_vien = n.ma_nhan_vien
-            WHERE d.nguoi_ban_giao = ? AND d.trang_thai = 'Đã duyệt'
-            ORDER BY d.ngay_bat_dau DESC
-        `;
-
-        db.query(sqlNhanBanGiao, [userHoTen], (loi2, danhSachBanGiao) => {
-            if (loi2) {
-                console.error(loi2);
-                danhSachBanGiao = [];
-            }
-
-            // Lệnh 3: Đếm số lượng đơn đang "Chờ duyệt" (Phục vụ huy hiệu menu của Sếp)
-            const sqlDemDon = "SELECT COUNT(*) AS so_luong FROM don_nghi_phep WHERE trang_thai = 'Chờ duyệt'";
-            
-            db.query(sqlDemDon, (loi3, ketQuaDem) => {
-                let soDon = 0;
-                if (!loi3 && ketQuaDem.length > 0) {
-                    soDon = ketQuaDem[0].so_luong;
-                }
-
-                // Đẩy tất cả dữ liệu, bao gồm cả danh sách bàn giao riêng ra giao diện
-                res.render('dashboard', { 
-                    user: req.session.user, 
-                    danhSachVangMat: danhSachVangMat,
-                    danhSachBanGiao: danhSachBanGiao, // Dữ liệu thông báo công việc mới
-                    soDonChoDuyet: soDon
-                });
-            });
-        });
-    });
-});
 // 3. Route hiển thị Dashboard (Đã nâng cấp: Kèm dữ liệu vẽ Biểu đồ Thống kê)
 app.get('/dashboard', (req, res) => {
     if (!req.session.user) return res.redirect('/');
@@ -160,15 +112,15 @@ app.get('/dashboard', (req, res) => {
                     
                     db.query(sqlThongKeThang, [user.ma_nhan_vien], (loi5, thongKeThang) => {
                         
-                        // Đẩy toàn bộ dữ liệu ra giao diện (Chuyển mảng Data sang dạng JSON để Chart.js đọc được)
+                        // Đẩy toàn bộ dữ liệu ra giao diện (Mảng Data được truyền trực tiếp, EJS sẽ stringify để Chart.js đọc được)
                         res.render('dashboard', { 
                             user: user, 
                             danhSachVangMat: vangMat || [],
                             danhSachBanGiao: banGiao || [],
                             danhSachSepCanDuyet: choDuyet || [], 
                             soDonChoDuyet: choDuyet ? choDuyet.length : 0,
-                            thongKeLoai: JSON.stringify(thongKeLoai || []),
-                            thongKeThang: JSON.stringify(thongKeThang || [])
+                            thongKeLoai: thongKeLoai || [],
+                            thongKeThang: thongKeThang || []
                         });
                     });
                 });
@@ -266,6 +218,7 @@ app.post('/xu-ly-duyet-don', (req, res) => {
     const ma_don = req.body.ma_don;
     const trang_thai_moi = req.body.trang_thai_moi;
     const nguoi_ban_giao_moi = req.body.nguoi_ban_giao_moi; 
+    const loai_nghi = req.body.loai_nghi;
     
     let sqlUpdateDon = "UPDATE don_nghi_phep SET trang_thai = ? WHERE ma_don = ?";
     let params = [trang_thai_moi, ma_don];
@@ -279,17 +232,22 @@ app.post('/xu-ly-duyet-don', (req, res) => {
         if (loi) return res.send("Lỗi cập nhật!");
 
         if (trang_thai_moi === 'Đã duyệt') {
-            const ma_nhan_vien = req.body.ma_nhan_vien;
-            const ngay_bat_dau = new Date(req.body.ngay_bat_dau);
-            const ngay_ket_thuc = new Date(req.body.ngay_ket_thuc);
-            
-            const thoiGianNghi = Math.abs(ngay_ket_thuc - ngay_bat_dau);
-            const soNgayNghi = Math.ceil(thoiGianNghi / (1000 * 60 * 60 * 24)) + 1;
+            // Chỉ trừ phép nếu là loại nghỉ phép năm có lương (gửi lên là "Phép năm")
+            if (loai_nghi === 'Phép năm') {
+                const ma_nhan_vien = req.body.ma_nhan_vien;
+                const ngay_bat_dau = new Date(req.body.ngay_bat_dau);
+                const ngay_ket_thuc = new Date(req.body.ngay_ket_thuc);
+                
+                const thoiGianNghi = Math.abs(ngay_ket_thuc - ngay_bat_dau);
+                const soNgayNghi = Math.ceil(thoiGianNghi / (1000 * 60 * 60 * 24)) + 1;
 
-            const sqlUpdatePhep = "UPDATE nhan_vien SET ngay_phep_da_dung = ngay_phep_da_dung + ? WHERE ma_nhan_vien = ?";
-            db.query(sqlUpdatePhep, [soNgayNghi, ma_nhan_vien], () => {
+                const sqlUpdatePhep = "UPDATE nhan_vien SET ngay_phep_da_dung = ngay_phep_da_dung + ? WHERE ma_nhan_vien = ?";
+                db.query(sqlUpdatePhep, [soNgayNghi, ma_nhan_vien], () => {
+                    res.redirect('/duyet-don');
+                });
+            } else {
                 res.redirect('/duyet-don');
-            });
+            }
         } else {
             res.redirect('/duyet-don');
         }
