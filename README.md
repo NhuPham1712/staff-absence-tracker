@@ -1,118 +1,252 @@
-KẾ HOẠCH PHÁT TRIỂN DỰ ÁN: HỆ THỐNG QUẢN LÝ NGHỈ PHÉP VÀ ĐIỀU HÀNH NHÂN SỰ (HR & LEAVE MANAGEMENT PORTAL)
+# TÀI LIỆU KẾ HOẠCH DỰ ÁN: HỆ THỐNG QUẢN LÝ NGHỈ PHÉP VÀ ĐIỀU HÀNH NHÂN SỰ (HR & LEAVE MANAGEMENT PORTAL)
 
-1. THÔNG TIN CHUNG
+## 1. TỔNG QUAN DỰ ÁN (PROJECT OVERVIEW)
 
-Sinh viên thực hiện: Phạm Như Ý
+* **Sinh viên thực hiện:** Phạm Như Ý
+* **Đơn vị thực tập:** Công ty cổ phần giải pháp công nghệ Unikom
+- **Tên đề tài:** Thiết kế và phát triển Cổng thông tin nội bộ Quản lý Nhân sự, Nghỉ phép và Tính lương tự động (HRMS)
+- **Mục tiêu dự án:** Tự động hóa quy trình quản trị nhân sự nội bộ cho doanh nghiệp thông qua việc số hóa hồ sơ nhân viên, minh bạch quy trình nộp và phê duyệt đơn xin nghỉ phép, đồng thời tự động hóa bảng tính lương hàng tháng. Dự án hướng tới việc giảm thiểu sai sót thủ công, tối ưu hóa quy trình bàn giao công việc chéo và tăng tính bảo mật thông tin nhân sự.
 
-Đơn vị thực tập: Công ty cổ phần giải pháp công nghệ Unikom 
+---
 
-Mục tiêu dự án: Phân tích, thiết kế và phát triển một hệ thống web-based nhằm số hóa toàn diện quy trình quản lý nhân sự. Hệ thống đóng vai trò như một Cổng thông tin nội bộ (Internal Portal), giúp doanh nghiệp lưu trữ 
+## 2. QUY TRÌNH PHÁT TRIỂN DỰ ÁN ỨNG DỤNG AI (AI-ASSISTED SDLC)
 
-tập trung hồ sơ nhân viên, điều phối nguồn lực theo phòng ban, đồng thời tự động hóa và minh bạch hóa quy trình phê duyệt nghỉ phép.
+Dự án được xây dựng dựa trên mô hình phát triển phần mềm linh hoạt (Agile/Scrum) có sự hỗ trợ của trí tuệ nhân tạo (Generative AI) xuyên suốt các giai đoạn của vòng đời phát triển phần mềm (SDLC) nhằm đẩy nhanh tốc độ triển khai và tối ưu chất lượng mã nguồn:
 
- 2. PHẠM VI DỰ ÁN (SCOPE OF WORK)
- 
-Dự án được chia thành 2 phân hệ (Module) cốt lõi:
+```mermaid
+graph TD
+    A[Giai đoạn 1: Khảo sát & Phân tích nghiệp vụ] --> B[Giai đoạn 2: Thiết kế CSDL & UI/UX]
+    B --> C[Giai đoạn 3: Phát triển logic Backend & API]
+    C --> D[Giai đoạn 4: Tối ưu bảo mật & Vẽ biểu đồ]
+    D --> E[Giai đoạn 5: Kiểm thử & Đóng gói sản phẩm]
+```
 
-Phân hệ Điều hành nhân sự (Core HR): Quản lý vòng đời dữ liệu nhân viên (Thêm mới, Cập nhật, Vô hiệu hóa tài khoản); điều phối và phân bổ nhân sự theo các phòng ban (Departments) và chức vụ (Roles).
+### 2.1. Giai đoạn lập kế hoạch (Plan)
+- **Sinh viên (Chủ trì):** Xác định các nghiệp vụ cần thiết gồm: quản lý nhân sự, kiểm soát số ngày nghỉ, quy trình phê duyệt đơn cấp trung, và cơ chế tính lương. Lên kế hoạch thực hiện chi tiết trong thời gian 4 tuần.
+- **AI (Hỗ trợ):** Chuẩn hóa kế hoạch thô thành cấu trúc và lộ trình triển khai chi tiết (`PLAN.md`).
 
-Phân hệ Quản lý nghỉ phép (Leave Management):Cung cấp giao diện tự phục vụ (Self-service) cho nhân viên nộp đơn; cung cấp bảng điều khiển (Dashboard) cho Quản lý phê duyệt đơn; hệ thống tự động kiểm tra và trừ quỹ ngày phép tiêu chuẩn.
-
-3. NỀN TẢNG CÔNG NGHỆ (TECH STACK)
-
-Kiến trúc phần mềm: MVC (Model - View - Controller).
-
-Backend: Java (Servlets/JSP), giao tiếp với database qua JDBC.
-
-Frontend: HTML5, CSS3, JavaScript, framework Bootstrap 5 (đảm bảo Responsive UI/UX).
-
-Cơ sở dữ liệu: MySQL (RDBMS).
-
-Môi trường & Công cụ: VS Code, XAMPP, Git/GitHub, StarUML, Figma.
-
-4. QUY TRÌNH PHÁT TRIỂN CÓ ỨNG DỤNG AI (AI-ASSISTED SDLC)
-
-Dự án được phát triển theo mô hình Agile kết hợp tối đa sức mạnh của Trí tuệ Nhân tạo (Generative AI) nhằm tối ưu hóa thời gian và nâng cao chất lượng mã nguồn. Dưới đây là phân chia luồng công việc chi tiết:
-
-4.1. PLAN (Lập kế hoạch)
-Sinh viên (Làm chính):** Xác định mục tiêu đồ án, phạm vi nghiệp vụ cần giải quyết cho doanh nghiệp. Lên ý tưởng các module cốt lõi và vạch ra mốc thời gian hoàn thành (Sprint 4 tuần).
-AI (Hỗ trợ): Chuẩn hóa ý tưởng thô thành tài liệu Kế hoạch chuyên nghiệp (`PLAN.md`). Gợi ý nền tảng công nghệ phù hợp.
-
- 4.2. KHẢO SÁT & PHÂN TÍCH YÊU CẦU
-Sinh viên (Làm chính): Đóng vai trò BA (Business Analyst), tìm hiểu quy trình thực tế tại công ty: quy tắc trừ quỹ phép, công thức tính lương Gross/Net, tỷ lệ đóng bảo hiểm 10.5%. 
+### 2.2. Giai đoạn phân tích yêu cầu (Analysis)
+- **Sinh viên (Chủ trì):** Khảo sát quy trình nghiệp vụ thực tế của công ty về cách thức trừ phép, chế độ nghỉ việc riêng không lương, cách tính lương cơ bản và tỷ lệ đóng các khoản bảo hiểm bắt buộc theo luật định (10.5%).
+- **AI (Hỗ trợ):** Chuyển đổi các tài liệu mô tả nghiệp vụ thành đặc tả kỹ thuật hệ thống, thiết lập mối quan hệ logic giữa các thực thể và gợi ý tích hợp quy trình bàn giao công việc để tránh gián đoạn vận hành của doanh nghiệp.
 
 <img width="7508" height="1408" alt="Blank diagram" src="https://github.com/user-attachments/assets/682d3fc1-7427-4ff9-af08-b33aafef218a" />
 
-AI (Hỗ trợ): Chuyển đổi các quy tắc nghiệp vụ (Business Rules) thành logic hệ thống. Gợi ý thêm tính năng thực tế (như luồng điều phối công việc bàn giao chéo).
+### 2.3. Giai đoạn thiết kế (Design)
+- **Sinh viên (Chủ trì):** Thiết kế sơ đồ thực thể liên kết (ERD), sơ đồ luồng dữ liệu (DFD), sơ đồ Use Case và phác thảo giao diện người dùng. Quyết định hướng phát triển giao diện theo phong cách Apple-like hiện đại, tối giản.
+- **AI (Hỗ trợ):** Tạo mã nguồn SQL khởi tạo bảng, thiết lập các ràng buộc toàn vẹn dữ liệu (khóa ngoại, giá trị mặc định) và xây dựng bộ dữ liệu mẫu ban đầu để phục vụ việc kiểm thử nhanh.
 
 <img width="1852" height="624" alt="Blank diagram - Page 3" src="https://github.com/user-attachments/assets/774d41c3-d5d9-4f84-a837-ea5373e30fb4" />
 
- 4.3. THIẾT KẾ (DB, UI, API)
-Sinh viên (Định hướng & Ra quyết định):** Xác định phong cách thiết kế UI. Quyết định các Route (API) cần thiết.
+### 2.4. Giai đoạn lập trình & triển khai (Implementation)
+- **Sinh viên (Chủ trì):** Cấu hình môi trường Node.js và Express, thiết lập cấu trúc thư mục chuẩn MVC. Đóng vai trò tích hợp hệ thống, ghép nối các router backend với giao diện EJS động.
+- **AI (Hỗ trợ - Đóng vai trò lập trình viên):** Lập trình các thuật toán xử lý dữ liệu phức tạp: đối chiếu và tự động nâng cấp mã hóa mật khẩu, truy vấn tính tổng số ngày nghỉ theo loại đơn, tự động phân loại thang lương cơ bản theo phòng ban và xử lý các phép tính khấu trừ lương thực nhận (NET).
+
+### 2.5. Giai đoạn kiểm thử (Testing)
+- **Sinh viên (Chủ trì):** Thực hiện kiểm thử thủ công (manual testing) đối với các luồng nghiệp vụ quan trọng. Ghi nhận lỗi giao diện trên thiết bị di động, lỗi vỡ biểu đồ do định dạng dữ liệu (double stringify) hoặc lỗi crash server khi đăng nhập sai mật khẩu của tài khoản chưa băm.
+- **AI (Hỗ trợ):** Đọc lỗi, phân tích nguyên nhân gốc rễ và sửa đổi code (chèn cấu trúc `try-catch` an toàn, tinh chỉnh câu lệnh query SQL, chuẩn hóa hàm parse JSON cho Chart.js).
+
+### 2.6. Giai đoạn đóng gói & vận hành (Release)
+- **Sinh viên (Chủ trì):** Quản lý mã nguồn trên Git/GitHub, cấu hình kết nối CSDL ổn định trên cổng 3307 qua XAMPP, viết báo cáo tổng kết thực tập và chạy thử nghiệm hệ thống cuối kỳ.
+- **AI (Hỗ trợ):** Tự động tạo tài liệu hướng dẫn kỹ thuật, viết chú thích mã nguồn để tăng khả năng bảo trì.
+
+---
+
+## 3. PHÂN TÍCH YÊU CẦU HỆ THỐNG (SYSTEM REQUIREMENTS)
+
+### 3.1. Các tác nhân và vai trò phân quyền (Actors & Roles)
+Hệ thống sử dụng thuộc tính `ma_chuc_vu` trong bảng `nhan_vien` để định danh và phân quyền người dùng:
+
+1. **Nhân viên thông thường (`ma_chuc_vu` > 2):**
+   - Đăng nhập, đăng xuất vào hệ thống bằng tài khoản email được cấp.
+   - Tạo mới đơn xin nghỉ phép (bao gồm việc chọn loại nghỉ, lý do nghỉ, thời gian nghỉ và chọn đồng nghiệp nhận bàn giao công việc).
+   - Xem lịch sử đơn xin nghỉ và theo dõi trạng thái đơn xin nghỉ của bản thân (Chờ duyệt, Đã duyệt, Đã hủy, Từ chối).
+   - Thực hiện hủy đơn xin nghỉ nếu đơn đang nằm ở trạng thái "Chờ duyệt".
+   - Xem và in phiếu chi tiết lương cá nhân hàng tháng.
+
+2. **Quản lý / HR (`ma_chuc_vu` = 2):**
+   - Sở hữu đầy đủ các quyền hạn của nhân viên thông thường.
+   - Truy cập vào module "Duyệt đơn" để xem toàn bộ danh sách các đơn xin nghỉ phép đang ở trạng thái "Chờ duyệt" của toàn công ty.
+   - Phê duyệt (Approve) hoặc Từ chối (Reject) đơn xin nghỉ, đồng thời có quyền chỉ định người bàn giao công việc mới thay thế trực tiếp tại giao diện duyệt đơn.
+   - Truy cập module "Hồ sơ Nhân sự" để theo dõi danh sách toàn bộ cán bộ nhân viên trong công ty.
+
+3. **Sếp / Ban Giám đốc / Admin (`ma_chuc_vu` = 1):**
+   - Sở hữu toàn quyền kiểm soát của hệ thống.
+   - Thực hiện thêm mới nhân sự vào hệ thống (tự động thiết lập mật khẩu mặc định được mã hóa bằng thuật toán Bcrypt).
+   - Truy cập Dashboard quản trị để giám sát hoạt động nhân sự (danh sách vắng mặt hôm nay, quản lý hòm thư phê duyệt, xem biểu đồ báo cáo thống kê tình hình nghỉ phép của toàn công ty).
+
+---
+
+## 4. KIẾN TRÚC HỆ THỐNG (SYSTEM ARCHITECTURE)
+
+Hệ thống được phát triển theo mô hình **MVC (Model - View - Controller)** tối giản sử dụng môi trường Node.js:
+
+* **Model:** Xử lý và thao tác dữ liệu trực tiếp thông qua module kết nối [ket_noi_csdl.js](file:///d:/staff-absence-tracker-main/staff-absence-tracker-main/ket_noi_csdl.js), sử dụng thư viện `mysql2` để giao tiếp với hệ quản trị cơ sở dữ liệu MySQL thông qua các câu lệnh SQL thuần túy.
+* **View:** Xây dựng bằng EJS (Embedded JavaScript) kết hợp với các thẻ logic hiển thị dữ liệu động từ máy chủ chuyển xuống. Giao diện được thiết kế theo phong cách glassmorphism hiện đại, responsive hoàn hảo trên mọi thiết bị di động bằng Bootstrap 5 và CSS tùy chỉnh.
+* **Controller:** Được tích hợp trực tiếp trong tập tin [index.js](file:///d:/staff-absence-tracker-main/staff-absence-tracker-main/index.js), chứa toàn bộ các logic định tuyến (routing), xử lý điều hướng nghiệp vụ, quản lý phiên làm việc (`express-session`), mã hóa bảo mật thông tin (`bcrypt`) và thiết lập khiên chống Brute Force (`express-rate-limit`).
 
 <img width="3760" height="4209" alt="Blank diagram - Page 2" src="https://github.com/user-attachments/assets/7798f80d-c310-408d-9992-fbb627b22c8c" />
 
-AI (Thực thi & Sinh mã nguồn - Làm chính): Viết câu lệnh SQL khởi tạo bảng, thiết lập khóa ngoại và tạo kịch bản Dữ liệu mẫu (Seeding Data). Sinh mã HTML/CSS/EJS xây dựng các component phức tạp.
+### 4.1. Thiết kế cơ sở dữ liệu (Database Schema)
+Cơ sở dữ liệu của ứng dụng gồm 2 bảng quan hệ chính được thiết kế tối ưu:
 
+#### Bảng `nhan_vien` (Lưu trữ hồ sơ nhân sự)
+| Tên cột | Kiểu dữ liệu | Ràng buộc | Ý nghĩa |
+| :--- | :--- | :--- | :--- |
+| `ma_nhan_vien` | INT | PRIMARY KEY, AUTO_INCREMENT | Mã định danh nhân viên |
+| `ho_ten` | VARCHAR(100) | NOT NULL | Họ và tên đầy đủ |
+| `email` | VARCHAR(100) | UNIQUE, NOT NULL | Email đăng nhập hệ thống |
+| `mat_khau` | VARCHAR(255) | NOT NULL | Mật khẩu (đã mã hóa Bcrypt) |
+| `so_dien_thoai`| VARCHAR(15) | NULL | Số điện thoại liên hệ |
+| `phong_ban` | VARCHAR(100) | NULL | Vị trí/Phòng ban (Tester, BA, Fullstack, DA, Designer...) |
+| `luong_co_ban` | INT | DEFAULT 5000000 | Lương cứng mặc định ban đầu |
+| `ma_chuc_vu` | INT | DEFAULT 3 | Cấp bậc phân quyền (1: Sếp, 2: HR, 3: Nhân viên) |
+| `tong_ngay_phep`| INT | DEFAULT 12 | Tổng quỹ ngày nghỉ phép năm được cấp |
+| `ngay_phep_da_dung`| INT | DEFAULT 0 | Tổng số ngày phép năm đã sử dụng |
+| `phu_cap` | INT | DEFAULT 1000000 | Phụ cấp ăn trưa, xăng xe |
+| `tien_ot` | INT | DEFAULT 0 | Tiền tăng ca làm thêm giờ |
+| `thuong` | INT | DEFAULT 0 | Tiền thưởng hiệu suất phát sinh |
 
-4.4. LẬP TRÌNH (Implementation)
-
-AI (Viết Code logic - Làm chính): Lập trình các thuật toán lõi trong Controller: tính lương, khấu trừ, cập nhật trạng thái đơn, và viết truy vấn SQL phức tạp (JOIN, COUNT, GROUP BY). Tích hợp thư viện bên thứ 3.
-
-Sinh viên (Ghép nối & Quản lý - Làm chính): Xây dựng môi trường Node.js. Nhận code từ AI, đọc hiểu, lắp ráp các module và quản lý luồng dữ liệu truyền qua Session. (Mô hình Pair-Programming).
-
-4.5. KIỂM THỬ (Testing & Debugging)
-
-Sinh viên (Tìm lỗi - Tester): Chạy thực tế hệ thống, thao tác các luồng nghiệp vụ để tìm lỗi vỡ giao diện (UI) hoặc lỗi logic (Bug). Cung cấp log lỗi cho AI.
-
-AI (Sửa lỗi - Fixer): Phân tích Stack Trace, tìm nguyên nhân gốc rễ. Viết lại mã nguồn sửa lỗi, cung cấp giải pháp phòng tránh lỗi sập hệ thống (Safe Fallback).
-
-4.6. RELEASE (Triển khai & Đóng gói)
-
-Sinh viên (Làm chính): Đẩy mã nguồn lên GitHub. Viết báo cáo thực tập, chuẩn bị kịch bản demo tính năng và bảo vệ trước hội đồng.
-
-AI (Hỗ trợ): Tự động sinh tài liệu kỹ thuật, bổ sung comment giải thích trong code để mã nguồn dễ bảo trì và bàn giao.
+#### Bảng `don_nghi_phep` (Lưu trữ đơn xin nghỉ phép)
+| Tên cột | Kiểu dữ liệu | Ràng buộc | Ý nghĩa |
+| :--- | :--- | :--- | :--- |
+| `ma_don` | INT | PRIMARY KEY, AUTO_INCREMENT | Mã định danh đơn từ |
+| `ma_nhan_vien` | INT | FOREIGN KEY REFERENCES `nhan_vien` | Mã nhân viên tạo đơn |
+| `loai_nghi` | VARCHAR(50) | NOT NULL | Loại nghỉ phép (Phép năm, Việc riêng, Ốm đau) |
+| `nguoi_ban_giao`| VARCHAR(100) | NULL | Họ tên đồng nghiệp nhận bàn giao công việc |
+| `ngay_bat_dau` | DATE | NOT NULL | Ngày bắt đầu thời gian nghỉ |
+| `ngay_ket_thuc` | DATE | NOT NULL | Ngày kết thúc thời gian nghỉ |
+| `ly_do` | TEXT | NULL | Lý do xin nghỉ phép chi tiết |
+| `trang_thai` | VARCHAR(50) | DEFAULT 'Chờ duyệt' | Trạng thái đơn (Chờ duyệt, Đã duyệt, Đã hủy, Từ chối) |
+| `ngay_tao` | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP | Ngày giờ nộp đơn lên hệ thống |
 
 ---
- 5. LỘ TRÌNH TRIỂN KHAI CHI TIẾT (SPRINT 4 TUẦN)
 
-Tuần 1: Phân tích kiến trúc & Thiết lập nền tảng (05/05 - 11/05)
+## 5. CHI TIẾT CÁC MODULE CHỨC NĂNG (SYSTEM IMPLEMENTATION)
 
-Mô hình hóa hệ thống: Phân tích quy trình nghiệp vụ của Công ty Present, thiết kế các biểu đồ Use Case và ERD (Entity-Relationship Diagram).
+### 5.1. Module Đăng nhập & Bảo mật (Authentication)
+*   **Đăng nhập hệ thống (`GET /` và `POST /xu-ly-dang-nhap`):**
+    *   **Tích hợp Khiên chống dò mật khẩu (`express-rate-limit`):** Áp dụng middleware `blockSpamDangNhap` giới hạn mỗi địa chỉ IP chỉ được phép thử đăng nhập sai tối đa 5 lần trong vòng 15 phút. Nếu vượt quá, hệ thống sẽ tự động chặn và thông báo tạm khóa.
+    *   **Cơ chế Tự động nâng cấp mã hóa (Auto-hashing):** Khi người dùng nhập thông tin đăng nhập, hệ thống sẽ truy vấn thông tin nhân viên theo Email. 
+        *   Nếu trường `mat_khau` lưu trong cơ sở dữ liệu khớp hoàn toàn ở dạng chuỗi thô (plain-text - do chuyển đổi từ cơ sở dữ liệu cũ), hệ thống sẽ tiến hành băm mật khẩu ngay lập tức bằng thuật toán `bcrypt.hash(matKhauNhap, 10)` và cập nhật đè chuỗi đã băm này vào cơ sở dữ liệu, sau đó cho phép đăng nhập thành công.
+        *   Nếu mật khẩu đã được băm sẵn (bắt đầu bằng ký tự đặc trưng của Bcrypt như `$2a$`, `$2b$`, `$2y$`), hệ thống sẽ sử dụng phương thức an toàn `bcrypt.compare(matKhauNhap, user.mat_khau)` để đối chiếu kiểm tra.
+    *   **Quản lý Session (`express-session`):** Thiết lập khóa Session `bi_mat_cua_cong_ty_present` lưu trữ phiên làm việc của người dùng với thời gian hết hạn cookie là 10 phút (`maxAge: 600000ms`).
 
-Thiết kế Cơ sở dữ liệu: Xây dựng cấu trúc các bảng trên MySQL, bao gồm `departments` (Phòng ban), `users` (Hồ sơ nhân sự), `roles` (Phân quyền) và `leave_requests` (Đơn từ). Thiết lập các khóa ngoại (Foreign Keys) để ràng buộc dữ liệu chặt chẽ.
+### 5.2. Module Quản lý Đơn xin nghỉ (Leave Management)
+*   **Tạo đơn xin nghỉ (`GET /tao-don` và `POST /xu-ly-tao-don`):**
+    *   Hệ thống tự động loại trừ tên của người đang đăng nhập khỏi danh sách nhận bàn giao bằng truy vấn loại trừ: `SELECT ho_ten, email FROM nhan_vien WHERE ma_nhan_vien != ?`.
+    *   Dữ liệu đơn từ gồm: `loai_nghi`, `nguoi_ban_giao`, `ngay_bat_dau`, `ngay_ket_thuc`, `ly_do` được lưu trữ vào bảng `don_nghi_phep` với trạng thái ban đầu mặc định là `'Chờ duyệt'`.
+*   **Lịch sử và hủy đơn (`GET /lich-su-nghi` và `POST /huy-don`):**
+    *   Hiển thị toàn bộ đơn xin nghỉ phép của nhân viên hiện tại theo thứ tự mới nhất lên trước.
+    *   Cho phép người dùng thực hiện hủy đơn xin nghỉ phép đối với các đơn đang ở trạng thái `'Chờ duyệt'` bằng cách cập nhật trường trạng thái của đơn thành `'Đã hủy'` trong cơ sở dữ liệu để bảo toàn lịch sử theo dõi.
+*   **Quy trình phê duyệt đơn (`GET /duyet-don` và `POST /xu-ly-duyet-don`):**
+    *   Chỉ dành riêng cho tài khoản có `ma_chuc_vu <= 2` (Admin/HR).
+    *   Hiển thị danh sách tất cả các đơn xin nghỉ phép đang có trạng thái `'Chờ duyệt'`. Quản lý có thể chọn thay đổi người nhận bàn giao công việc trực tiếp tại giao diện trước khi bấm duyệt.
+    *   **Logic Trừ quỹ phép năm:** Khi quản lý phê duyệt đơn thành công (`trang_thai_moi === 'Đã duyệt'`), hệ thống kiểm tra thuộc tính `loai_nghi`. Nếu là loại nghỉ có hưởng lương `'Phép năm'`, hệ thống sẽ tự động tính toán tổng số ngày nghỉ bằng công thức:
+        $$\text{soNgayNghi} = \text{ngay\_ket\_thuc} - \text{ngay\_bat\_dau} + 1$$
+        Sau đó chạy câu lệnh SQL để cộng dồn trực tiếp vào số ngày phép đã sử dụng của nhân viên: `UPDATE nhan_vien SET ngay_phep_da_dung = ngay_phep_da_dung + ? WHERE ma_nhan_vien = ?`.
+        *Nếu là các loại nghỉ khác như `'Việc riêng'`, quỹ ngày phép năm của nhân viên sẽ được giữ nguyên (ngày nghỉ không lương này sẽ được tự động xử lý và trừ tiền tại bảng tính lương cuối tháng).*
 
-Khởi tạo dự án: Cài đặt project chuẩn MVC trên NetBeans, viết lớp `DBContext` cấu hình kết nối JDBC, khởi tạo Git repository và đồng bộ mã nguồn lên GitHub.
+### 5.3. Module Tính lương tự động (Payroll Module)
+*   **Tính toán chi tiết thu nhập (`GET /bang-luong`):**
+    *   Nhân viên truy cập vào module để xem phiếu lương tự động tính toán cho tháng hiện tại.
+    *   **Thang lương cơ bản tự động phân bậc theo Phòng ban / Vị trí chuyên môn:** Để giảm thiểu công tác thiết lập thủ công, hệ thống sử dụng cấu trúc điều kiện `switch-case` tự động gán lương dựa trên phòng ban thực tế của nhân viên:
+        -   **Tester:** Lương cơ bản = 9.000.000 đ
+        -   **Business Analyst (BA):** Lương cơ bản = 15.000.000 đ
+        -   **Fullstack Developer:** Lương cơ bản = 30.000.000 đ
+        -   **Data Analyst (DA):** Lương cơ bản = 12.000.000 đ
+        -   **Software Developer:** Lương cơ bản = 12.000.000 đ
+        -   **UI-UX Designer:** Lương cơ bản = 13.000.000 đ
+        -   *Vị trí khác:* Giữ nguyên mức lương cơ bản trong trường `luong_co_ban` lưu trữ sẵn ở CSDL (mặc định 5.000.000 đ nếu trống).
+    *   **Logic tính trừ lương khi nghỉ việc riêng (Không lương):**
+        *   Quy ước số ngày công chuẩn trong tháng của doanh nghiệp là **22 ngày**.
+        *   Lương ngày công quy chuẩn: $\text{luongMotNgay} = \text{luongCoBan} / 22$.
+        *   Hệ thống thực hiện truy vấn đếm tổng số ngày nghỉ việc riêng đã được phê duyệt trong tháng hiện tại:
+            ```sql
+            SELECT SUM(DATEDIFF(ngay_ket_thuc, ngay_bat_dau) + 1) as tong_ngay_tru 
+            FROM don_nghi_phep 
+            WHERE ma_nhan_vien = ? AND trang_thai = 'Đã duyệt' AND loai_nghi = 'Việc riêng'
+            AND MONTH(ngay_bat_dau) = ? AND YEAR(ngay_bat_dau) = ?
+            ```
+        *   Tính khoản trừ nghỉ việc riêng: $\text{truNghiViecRieng} = \text{tong\_ngay\_tru} \times \text{luongMotNgay}$.
+    *   **Các công thức tài chính:**
+        *   **Tổng thu nhập (Gross):**
+            $$\text{tongThuNhap} = \text{luongCoBan} + \text{phuCap} + \text{tienOT} + \text{thuong}$$
+            *(Mặc định phụ cấp ăn trưa và đi lại là 1.000.000 đ nếu không cấu hình).*
+        *   **Bảo hiểm bắt buộc (10.5%):**
+            $$\text{baoHiem} = \text{luongCoBan} \times 10.5\%$$
+            *(Trích đóng bảo hiểm gồm: 8% BHXH, 1.5% BHYT, 1% BHTN trích trực tiếp từ lương cơ bản).*
+        *   **Tổng khấu trừ:**
+            $$\text{tongKhauTru} = \text{truNghiViecRieng} + \text{baoHiem}$$
+        *   **Lương thực nhận (Net):**
+            $$\text{thucLanh} = \text{tongThuNhap} - \text{tongKhauTru}$$
 
-Phát triển Module Authentication: Viết luồng xử lý Đăng nhập/Đăng xuất, phân quyền truy cập cơ bản dựa trên Role (Admin/HR, Manager, Employee).
+### 5.4. Module Quản lý Nhân sự (HR Administration)
+*   **Danh sách nhân sự (`GET /quan-ly-nhan-su`):** 
+    *   Chỉ cho phép tài khoản Admin/HR truy cập.
+    *   Liệt kê toàn bộ thông tin nhân sự trong hệ thống, sắp xếp theo cấp bậc từ cao xuống thấp và mã nhân viên giảm dần.
+*   **Thêm nhân sự mới (`POST /them-nhan-vien`):**
+    *   Tiếp nhận các thông tin cá nhân: họ tên, email đăng nhập, số điện thoại, vị trí phòng ban, mức lương cơ bản và cấp bậc phân quyền.
+    *   Hệ thống tự động thực hiện băm mật khẩu mặc định (mặc định ban đầu là `123456`) bằng thuật toán Bcrypt trước khi lưu trữ vào bảng `nhan_vien` để đảm bảo an toàn tuyệt đối ngay từ đầu.
 
+### 5.5. Module Dashboard & Báo cáo thống kê (Dashboard & Analytics)
+*   **Bảng giám sát vận hành (`GET /dashboard`):**
+    *   **Thống kê nhân sự vắng mặt hôm nay:** Hệ thống lọc danh sách những nhân viên có đơn nghỉ phép ở trạng thái `'Đã duyệt'` và ngày hiện tại nằm trong khoảng thời gian nghỉ:
+        ```sql
+        SELECT n.ho_ten, d.loai_nghi, d.nguoi_ban_giao 
+        FROM don_nghi_phep d 
+        JOIN nhan_vien n ON d.ma_nhan_vien = n.ma_nhan_vien 
+        WHERE d.trang_thai = 'Đã duyệt' AND CURDATE() BETWEEN d.ngay_bat_dau AND d.ngay_ket_thuc
+        ```
+    *   **Theo dõi danh sách bàn giao:** Hiển thị danh sách các đơn nghỉ phép của đồng nghiệp mà người dùng hiện tại được chỉ định làm người bàn giao công việc chéo để nhân viên sắp xếp xử lý công việc.
+    *   **Tích hợp biểu đồ thống kê Chart.js:**
+        *   *Biểu đồ tròn (Doughnut Chart):* Biểu diễn phân bổ lý do nghỉ phép dựa trên số lượng đơn xin nghỉ đã được duyệt của nhân viên hiện tại theo từng loại hình nghỉ.
+        *   *Biểu đồ cột (Bar Chart):* Thống kê tổng số ngày nghỉ phép lũy kế theo từng tháng trong năm hiện hành của nhân viên đang đăng nhập.
 
-Tuần 2: Xây dựng Phân hệ Điều hành Nhân sự (12/05 - 18/05)
+---
 
-Xây dựng giao diện Danh bạ: Thiết kế trang hiển thị danh sách toàn bộ nhân sự, phân trang (pagination) và tích hợp thanh tìm kiếm theo tên hoặc phòng ban.
+## 6. MÔI TRƯỜNG TRIỂN KHAI HỆ THỐNG (DEPLOYMENT ENVIRONMENT)
 
-Xử lý nghiệp vụ CRUD: Lập trình các file Servlets và DAO thực thi các chức năng Thêm mới, Xem chi tiết, Chỉnh sửa hồ sơ và Xóa (hoặc vô hiệu hóa) nhân viên.
+Để vận hành hệ thống ổn định và kiểm thử các tính năng bảo mật, môi trường triển khai cần đáp ứng các điều kiện sau:
 
-Điều phối phòng ban: Xây dựng logic gắn kết nhân viên vào các phòng ban cụ thể, cho phép HR luân chuyển nhân sự giữa các phòng ban thông qua giao diện hệ thống.
+*   **Hệ điều hành máy chủ:** Windows 10/11 hoặc các bản phân phối Linux phổ biến.
+*   **Môi trường chạy mã:** Node.js (phiên bản v16.x hoặc mới hơn để hỗ trợ đầy đủ các hàm xử lý bất đồng bộ).
+*   **Hệ quản trị cơ sở dữ liệu:** MySQL Server (phiên bản 5.7 hoặc 8.0 trở lên) được quản trị qua XAMPP Control Panel hoặc cài độc lập. Hệ thống kết nối qua cổng mặc định 3306 (hoặc cấu hình cổng 3307 tùy chỉnh).
+*   **Các thư viện phụ thuộc cốt lõi:**
+    *   `express` (v5.2.x): Điều hướng ứng dụng Web.
+    *   `ejs` (v5.0.x): Template Engine thiết kế giao diện động.
+    *   `mysql2` (v3.22.x): Kết nối và truy vấn cơ sở dữ liệu tốc độ cao.
+    *   `bcrypt` (v6.0.x): Mã hóa mật khẩu an toàn một chiều.
+    *   `express-session` (v1.19.x): Quản lý trạng thái và phiên đăng nhập.
+    *   `express-rate-limit` (v8.5.x): Giới hạn tần suất đăng nhập chống brute force.
+*   **Địa chỉ truy cập kiểm thử nội bộ:** `http://localhost:3000`
 
-Kiểm thử dữ liệu: Thực hiện Unit Test các câu lệnh SQL INSERT/UPDATE, đảm bảo không có dữ liệu rác (Data Integrity) khi thao tác với hồ sơ.
+---
 
-Tuần 3: Xây dựng Phân hệ Nghỉ phép & Tối ưu UI/UX (19/05 - 25/05)
+## 7. LỘ TRÌNH TRIỂN KHAI THỰC TẾ (4 TUẦN TỪ 03/05 - 27/05)
 
-Thiết kế UI/UX: Phác thảo Wireframe và ứng dụng Bootstrap 5 để xây dựng giao diện tương thích tốt trên cả máy tính
+Quá trình nghiên cứu, thiết kế và phát triển hệ thống được tổ chức triển khai chặt chẽ theo lộ trình 4 tuần thực tế từ ngày 03/05/2026 đến ngày 27/05/2026:
 
-Nghiệp vụ Nhân viên (Employee): Phát triển form nộp đơn xin nghỉ, lập trình thuật toán kiểm tra tính hợp lệ của ngày nhập (không chọn ngày trong quá khứ) và chặn gửi đơn nếu vượt quá quỹ ngày phép hiện có.
+### Giai đoạn 1: Khảo sát nghiệp vụ, phân tích và thiết kế hệ thống (03/05 - 09/05)
+*   Nghiên cứu hiện trạng quản lý nhân sự thủ công của Công ty Present, xác định các nút thắt trong khâu nộp đơn xin nghỉ phép và tính toán bảng lương cuối tháng.
+*   Thiết kế kiến trúc chức năng hệ thống, vẽ sơ đồ Use Case biểu diễn tương tác của 3 tác nhân chính (Nhân viên, Quản lý/HR, Sếp/Admin).
+*   Phân tích cấu trúc thực thể dữ liệu, vẽ sơ đồ ERD xác định mối quan hệ giữa bảng Nhân viên (`nhan_vien`) và Đơn nghỉ phép (`don_nghi_phep`).
+*   Khởi tạo cơ sở dữ liệu `he_thong_nhan_su` trên MySQL (qua XAMPP), cấu hình các ràng buộc khóa ngoại, khóa chính để bảo đảm toàn vẹn dữ liệu.
 
-Nghiệp vụ Quản lý (Manager): Phát triển màn hình xét duyệt, lấy danh sách đơn từ cơ sở dữ liệu và hiển thị theo trạng thái (Pending/Approved/Rejected).
+### Giai đoạn 2: Cài đặt khung ứng dụng MVC và module Đăng nhập & Bảo mật (10/05 - 16/05)
+*   Thiết lập cấu trúc dự án Node.js, cài đặt các package cốt lõi (`express`, `ejs`, `mysql2`, `bcrypt`, `express-session`, `express-rate-limit`).
+*   Xây dựng module dùng chung kết nối cơ sở dữ liệu [ket_noi_csdl.js](file:///d:/staff-absence-tracker-main/staff-absence-tracker-main/ket_noi_csdl.js) thông qua MySQL Connection Pool.
+*   Lập trình tính năng Đăng nhập và Đăng xuất trong [index.js](file:///d:/staff-absence-tracker-main/staff-absence-tracker-main/index.js), cấu hình quản lý phiên làm việc thông qua session an toàn.
+*   Tích hợp mã hóa mật khẩu một chiều sử dụng thuật toán **Bcrypt** cho tài khoản mới. Viết logic tự động phát hiện mật khẩu dạng thô (plain-text) của hệ thống cũ và băm nâng cấp bảo mật tự động ngay khi đăng nhập lần đầu.
+*   Xây dựng module Quản lý hồ sơ nhân sự dành riêng cho tài khoản Sếp/HR để theo dõi và thêm mới tài khoản nhân viên.
 
-Xử lý đồng bộ dữ liệu: Viết logic tự động trừ số ngày phép (used_leave_days) của nhân viên ngay khi Quản lý bấm duyệt đơn thành công.
+### Giai đoạn 3: Xây dựng Module Quản lý Nghỉ phép và Tối ưu hóa UI/UX (17/05 - 23/05)
+*   Phát triển biểu mẫu Tạo đơn xin nghỉ phép `/tao-don` (GET/POST) kèm logic loại bỏ tên chính chủ khỏi danh sách đồng nghiệp nhận bàn giao công việc chéo.
+*   Lập trình trang Xem lịch sử đơn xin nghỉ `/lich-su-nghi` cho phép nhân viên theo dõi trạng thái đơn và thực hiện hủy đơn đối với các đơn đang ở trạng thái "Chờ duyệt".
+*   Xây dựng giao diện duyệt đơn `/duyet-don` cho cấp Quản lý/HR, tích hợp logic tính số ngày nghỉ phép thực tế và tự động trừ quỹ ngày phép năm của nhân sự nếu duyệt đơn thuộc loại nghỉ phép "Phép năm".
+*   Thiết kế và đồng bộ lại toàn bộ giao diện của 7 trang EJS sang ngôn ngữ thiết kế tối giản hiện đại (Apple Glassmorphism) với font chữ **Helvetica** và tông màu chủ đạo vàng champagne `#F3E6B3`.
 
-Tuần 4: Trực quan hóa dữ liệu, Rà soát & Đóng gói (26/05 - 31/05)
-
-Trực quan hóa thống kê (Dashboard): Nhúng thư viện Chart.js để vẽ các biểu đồ báo cáo dành riêng cho cấp quản lý (ví dụ: Biểu đồ tròn thể hiện cơ cấu nhân sự theo phòng ban, Biểu đồ cột thể hiện tỷ lệ duyệt đơn trong tháng).
-
-Kiểm soát chất lượng (QA): Rà soát bảo mật (sử dụng PreparedStatement để chống SQL Injection), xử lý các ngoại lệ (Exception Handling) để hiển thị thông báo lỗi thân thiện thay vì sập hệ thống (Crash).
-
-Hoàn thiện tài liệu: Viết nội dung file `README.md` bao gồm yêu cầu hệ thống, hướng dẫn cài đặt cơ sở dữ liệu và cách khởi chạy ứng dụng.
-
-Bàn giao dự án: Hoàn tất mã nguồn trên nhánh (branch) chính của GitHub, chuẩn bị kịch bản (Test cases) và dữ liệu mẫu để Demo bảo vệ thực tập.
+### Giai đoạn 4: Lập trình Module Tính lương tự động, Dashboard thống kê và Bảo mật nâng cao (24/05 - 27/05)
+*   Xây dựng nghiệp vụ tính lương tự động `/bang-luong`, lập trình logic gán lương cơ bản theo phòng ban, tự động đếm số ngày nghỉ không lương (Việc riêng) đã duyệt trong tháng để trừ lương ngày công chuẩn (22 ngày), và trích đóng bảo hiểm xã hội bắt buộc 10.5%.
+*   Tích hợp thư viện **Chart.js** vẽ 2 biểu đồ doughnut phân bổ lý do nghỉ phép và bar chart biểu thị lũy kế số ngày nghỉ phép theo từng tháng trên Dashboard quản trị.
+*   Thiết lập khiên bảo mật Brute Force bằng `express-rate-limit` chống spam đăng nhập.
+*   Tiến hành kiểm thử diện rộng (với bộ 50 Test Cases), khắc phục lỗi double stringify khiến biểu đồ Chart.js bị vỡ, hoàn thiện các tài liệu kế hoạch dự án và đóng gói release mã nguồn.
