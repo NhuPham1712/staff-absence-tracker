@@ -219,3 +219,34 @@ Cơ sở dữ liệu của ứng dụng gồm 2 bảng quan hệ chính được
     *   `express-session` (v1.19.x): Quản lý trạng thái và phiên đăng nhập.
     *   `express-rate-limit` (v8.5.x): Giới hạn tần suất đăng nhập chống brute force.
 *   **Địa chỉ truy cập kiểm thử nội bộ:** `http://localhost:3000`
+
+---
+
+## 7. LỘ TRÌNH TRIỂN KHAI THỰC TẾ (4 TUẦN TỪ 03/05 - 27/05)
+
+Quá trình nghiên cứu, thiết kế và phát triển hệ thống được tổ chức triển khai chặt chẽ theo lộ trình 4 tuần thực tế từ ngày 03/05/2026 đến ngày 27/05/2026:
+
+### Giai đoạn 1: Khảo sát nghiệp vụ, phân tích và thiết kế hệ thống (03/05 - 09/05)
+*   Nghiên cứu hiện trạng quản lý nhân sự thủ công của Công ty Present, xác định các nút thắt trong khâu nộp đơn xin nghỉ phép và tính toán bảng lương cuối tháng.
+*   Thiết kế kiến trúc chức năng hệ thống, vẽ sơ đồ Use Case biểu diễn tương tác của 3 tác nhân chính (Nhân viên, Quản lý/HR, Sếp/Admin).
+*   Phân tích cấu trúc thực thể dữ liệu, vẽ sơ đồ ERD xác định mối quan hệ giữa bảng Nhân viên (`nhan_vien`) và Đơn nghỉ phép (`don_nghi_phep`).
+*   Khởi tạo cơ sở dữ liệu `he_thong_nhan_su` trên MySQL (qua XAMPP), cấu hình các ràng buộc khóa ngoại, khóa chính để bảo đảm toàn vẹn dữ liệu.
+
+### Giai đoạn 2: Cài đặt khung ứng dụng MVC và module Đăng nhập & Bảo mật (10/05 - 16/05)
+*   Thiết lập cấu trúc dự án Node.js, cài đặt các package cốt lõi (`express`, `ejs`, `mysql2`, `bcrypt`, `express-session`, `express-rate-limit`).
+*   Xây dựng module dùng chung kết nối cơ sở dữ liệu [ket_noi_csdl.js](file:///d:/staff-absence-tracker-main/staff-absence-tracker-main/ket_noi_csdl.js) thông qua MySQL Connection Pool.
+*   Lập trình tính năng Đăng nhập và Đăng xuất trong [index.js](file:///d:/staff-absence-tracker-main/staff-absence-tracker-main/index.js), cấu hình quản lý phiên làm việc thông qua session an toàn.
+*   Tích hợp mã hóa mật khẩu một chiều sử dụng thuật toán **Bcrypt** cho tài khoản mới. Viết logic tự động phát hiện mật khẩu dạng thô (plain-text) của hệ thống cũ và băm nâng cấp bảo mật tự động ngay khi đăng nhập lần đầu.
+*   Xây dựng module Quản lý hồ sơ nhân sự dành riêng cho tài khoản Sếp/HR để theo dõi và thêm mới tài khoản nhân viên.
+
+### Giai đoạn 3: Xây dựng Module Quản lý Nghỉ phép và Tối ưu hóa UI/UX (17/05 - 23/05)
+*   Phát triển biểu mẫu Tạo đơn xin nghỉ phép `/tao-don` (GET/POST) kèm logic loại bỏ tên chính chủ khỏi danh sách đồng nghiệp nhận bàn giao công việc chéo.
+*   Lập trình trang Xem lịch sử đơn xin nghỉ `/lich-su-nghi` cho phép nhân viên theo dõi trạng thái đơn và thực hiện hủy đơn đối với các đơn đang ở trạng thái "Chờ duyệt".
+*   Xây dựng giao diện duyệt đơn `/duyet-don` cho cấp Quản lý/HR, tích hợp logic tính số ngày nghỉ phép thực tế và tự động trừ quỹ ngày phép năm của nhân sự nếu duyệt đơn thuộc loại nghỉ phép "Phép năm".
+*   Thiết kế và đồng bộ lại toàn bộ giao diện của 7 trang EJS sang ngôn ngữ thiết kế tối giản hiện đại (Apple Glassmorphism) với font chữ **Helvetica** và tông màu chủ đạo vàng champagne `#F3E6B3`.
+
+### Giai đoạn 4: Lập trình Module Tính lương tự động, Dashboard thống kê và Bảo mật nâng cao (24/05 - 27/05)
+*   Xây dựng nghiệp vụ tính lương tự động `/bang-luong`, lập trình logic gán lương cơ bản theo phòng ban, tự động đếm số ngày nghỉ không lương (Việc riêng) đã duyệt trong tháng để trừ lương ngày công chuẩn (22 ngày), và trích đóng bảo hiểm xã hội bắt buộc 10.5%.
+*   Tích hợp thư viện **Chart.js** vẽ 2 biểu đồ doughnut phân bổ lý do nghỉ phép và bar chart biểu thị lũy kế số ngày nghỉ phép theo từng tháng trên Dashboard quản trị.
+*   Thiết lập khiên bảo mật Brute Force bằng `express-rate-limit` chống spam đăng nhập.
+*   Tiến hành kiểm thử diện rộng (với bộ 50 Test Cases), khắc phục lỗi double stringify khiến biểu đồ Chart.js bị vỡ, hoàn thiện các tài liệu kế hoạch dự án và đóng gói release mã nguồn.
