@@ -1,5 +1,14 @@
 # TÀI LIỆU ĐẶC TẢ USE CASE TỔNG QUÁT (USE CASE SPECIFICATION)
 
+> [!NOTE]
+> ### 🔗 LIÊN KẾT HỆ THỐNG TÀI LIỆU DỰ ÁN
+> *   **Kế hoạch dự án (Project Plan):** [PROJECT_PLAN](file:///d:/staff-absence-tracker-main/staff-absence-tracker-main/PROJECT_PLAN)
+> *   **Đặc tả Use Case & Sơ đồ:** [USE_CASE_SPEC.md](file:///d:/staff-absence-tracker-main/staff-absence-tracker-main/USE_CASE_SPEC.md)
+> *   **Sơ đồ thiết kế hệ thống (UML):** [SYSTEM_DIAGRAMS.md](file:///d:/staff-absence-tracker-main/staff-absence-tracker-main/SYSTEM_DIAGRAMS.md)
+> *   **Kịch bản kiểm thử (50 Test Cases):** [TEST_CASES.md](file:///d:/staff-absence-tracker-main/staff-absence-tracker-main/TEST_CASES.md)
+
+---
+
 ## 1. TỔNG QUAN HỆ THỐNG USE CASE
 Hệ thống bao gồm 2 nhóm tác nhân (Actors) chính:
 - **Nhân viên (Staff):** Thực hiện các tác vụ cá nhân (Đăng nhập, xem Dashboard, Tạo đơn xin nghỉ, xem Phiếu lương).
@@ -130,4 +139,3 @@ flowchart LR
   5. Hệ thống lưu thông tin nhân sự mới vào DB và cập nhật lại danh sách hiển thị.
 * **Luồng ngoại lệ (Alternative/Exception Flows):**
   - **Trùng lặp Email:** Nếu Email nhập vào đã tồn tại trong DB, hệ thống báo lỗi trùng lặp và hủy thao tác thêm mới.
-
